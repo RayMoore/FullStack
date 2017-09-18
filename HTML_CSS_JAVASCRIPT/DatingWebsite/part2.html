@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      fieldset {width: 720px; margin-bottom: 10px; background: lightyellow; border: 10px solid yellow;}
+      label {width: 180px; text-align: right; display: inline-block; vertical-align: text-top; box-sizing: border-box;}
+      select {margin-left: -4px}
+      textarea {width: 360px; height: 50px}
+      .radio, .checkbox {width: auto; }
+      .words_bothSides_range_left {text-align: center; background: darkred; color: white; display: inline-block;}
+      .words_bothSides_range_right {text-align: center; background: purple; color: white; display: inline-block;}
+    </style>
+  </head>
+  <body>
+    <h1>Please Enter Your Details For Our Dating Website!</h1>
+    <form action="https://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>
+          Your Face
+        </legend>
+        <label for="image">Your image:</label><input type="file" id="image" name="image" required/>
+        <br />
+        <label for="preview">Image preview:</label><img id="preview" name="preview"/>
+        <br />
+      </fieldset>
+      <fieldset>
+        <legend>
+          Your General Details
+        </legend>
+        <label for="name">Name:</label><input type="text" id="name" name="name" required />
+        <br />
+        <label for="gender">Gender:</label>
+          <input type="radio" id="male" name="male" value="male" required />
+          <label class="radio" for="male">Male</label>
+          <input type="radio" id="female" name="female" value="female" required />
+          <label class="radio" for="female">Female</label>
+        <br />
+        <label for="age">Age:</label><input type="number" id="age" name="age" required />
+        <br />
+        <label for="dob">Date of birth:</label><input type="date" id="dob" name="dob" />
+        <br />
+        <label for="fcolor">Favorite color:</label><input type="color" id="fcolor" name="fcolor" />
+        <br />
+        <label for="country">Which country:</label>
+        <select id="country" name="country">
+          <option value="ns">no selection</option>
+          <option value="US">United States</option>
+          <option value="CN">China</option>
+          <option value="NL">Netherlands</option>
+          <option value="ES">Spain</option>
+          <option value="AU">Australia</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>
+          Your Indicators
+        </legend>
+        <label for="height">Height:</label>
+          <span class="words_bothSides_range_left">Short</span>
+            <input type="range" min="0" max="100" step="5" id="height" name="height" />
+          <span class="words_bothSides_range_right">Tall</span>
+        <br />
+        <label for="salary">Salary:</label>
+          <span class="words_bothSides_range_left">Poor</span>
+            <input type="range" min="0" max="100" step="5" id="salary" name="salary" />
+          <span class="words_bothSides_range_right">Rich</span>
+        <br />
+      </fieldset>
+      <fieldset>
+        <legend>
+          Your Contact Information
+        </legend>
+        <label for="email">Email:</label><input type="email" id="email" name="email" required />
+        <br />
+        <label for="mobile">Mobile:</label><input type="tel" id="mobile" name="mobile" />
+        <br />
+        <label for="address">Address:</label><textarea id="address" name="address"></textarea>
+        <br />
+        <label for="method">Method to contact you:</label>
+        <input type="checkbox" id="methodEmail" name="method_email" value="method_email"/>
+        <label class="checkbox" for="methodEmail">Email</label>
+        <input type="checkbox" id="methodWhatsapp" name="method_whatsapp" value="method_whatsapp"/>
+        <label class="checkbox" for="methodWhatsapp">Whatsapp</label>
+        <input type="checkbox" id="methodInapp" name="method_inapp" value="method_inapp"/>
+        <label class="checkbox" id="methodInapp">In-app chat</label>
+        <br />
+      </fieldset>
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
