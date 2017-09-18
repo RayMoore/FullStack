@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+    #body{
+      transition: 1s;
+    }
+  </style>
+</head>
+<body id="body" onload="start_game()">
+  <script type="text/javascript" charset="utf-8">
+    function start_game(){
+      var colors = [ "cornflowerblue", "burlywood", "darkred", "firebrick", "floralwhite", "yellow", "purple", "green", "gray", "magenta", "orange", "violet"];
+      // var start_index = 0;
+      // show_background_color_withTimeout(colors, start_index, 1000);
+      var target;
+      var guess_input;
+      do_game(colors, target, guess_input);
+
+    }
+
+    function do_game(colors, target, guess_input) {
+      colors.sort();
+      target = Math.floor(Math.random() * colors.length);
+      alert("keep in mind: "+colors[target]);
+      var count = 0;
+      do {
+        guess_input = prompt(
+          "I am thinking of one of these colors\n\n" + colors.join(", ") +
+          "\n\nWhat color am I thinking of?"
+        )
+        count++;
+        check_guess(count, guess_input, target, colors);
+      } while (guess_input != colors[target]);
+      show_background_color(guess_input);
+    }
+
+    function check_guess(count, guess_input, target, colors) {
+      var idx = colors.indexOf(guess_input);
+      if (idx < 0){
+        // cannot find guess_input in the colors array
+        alert("I don't recognize that color!");
+      }else if (idx > target){
+        alert("Your input is alphabetically higher than mine!");
+      }else if (idx < target){
+        alert("Your input is alphabetically lower than mine!");
+      }else{
+        // found the color and set the background to this color
+        body_ele = document.getElementsByTagName("body")[0];
+        body_ele.style.background = guess_input;
+        alert("You are right! You took " + count + " guesses!");
+        return false;
+      }
+      return true;
+    }
+
+    // set background color with time intervale
+    function show_background_color_withTimeout(colors,index,time){
+      if(!(index>=0&&index<colors.length)){
+        console.log("index outbound");
+        return;
+      }
+      body = document.getElementsByTagName("body")[0];
+      body.style.background = colors[index];
+      console.log(index);
+      console.log(colors[index]);
+      index++;
+      var intr = setInterval(function(){
+        body.style.background = colors[index];
+        index++;
+        if(index>=colors.length) clearInterval(intr);
+      },time)
+    }
+
+    // set background color with a single color
+    function show_background_color(guess_color){
+      body_ele = document.getElementsByTagName("body")[0];
+      body_ele.style.background = guess_color;
+    }
+
+  </script>
+</body>
+</html>

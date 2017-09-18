@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+    #body{
+      transition: 1s;
+    }
+  </style>
+</head>
+<body id="body" onload="start_game()">
+  <script type="text/javascript" charset="utf-8">
+    function start_game(){
+      var colors = [ "cornflowerblue", "burlywood", "darkred", "firebrick", "floralwhite", "yellow", "purple", "green", "gray", "magenta", "orange", "violet"];
+      // var start_index = 0;
+      // show_background_color_withTimeout(colors, start_index, 1000);
+      var target;
+      var guess_input;
+      do_game(colors, target, guess_input);
+
+    }
+
+    function do_game(colors, target, guess_input) {
+      colors.sort();
+      target = Math.floor(Math.random() * colors.length);
+      alert("keep in mind: "+colors[target]);
+      do {
+        guess_input = prompt(
+          "I am thinking of one of these colors\n\n" + colors.join(", ") +
+          "\n\nWhat color am I thinking of?"
+        )
+      } while (guess_input != colors[target]);
+      show_background_color(guess_input);
+    }
+
+    // set background color with time intervale
+    function show_background_color_withTimeout(colors,index,time){
+      if(!(index>=0&&index<colors.length)){
+        console.log("index outbound");
+        return;
+      }
+      body = document.getElementsByTagName("body")[0];
+      body.style.background = colors[index];
+      console.log(index);
+      console.log(colors[index]);
+      index++;
+      var intr = setInterval(function(){
+        body.style.background = colors[index];
+        index++;
+        if(index>=colors.length) clearInterval(intr);
+      },time)
+    }
+
+    // set background color with a single color
+    function show_background_color(guess_color){
+      body_ele = document.getElementsByTagName("body")[0];
+      body_ele.style.background = guess_color;
+    }
+
+  </script>
+</body>
+</html>
