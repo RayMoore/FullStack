@@ -10,12 +10,14 @@ var authenticate = require('./authenticate');
 
 var config = require('./config');
 
-mongoose.connect(config.mongoUrl, { useNewUrlParser: true });
+mongoose.connect(config.mongoUrl, {
+  useNewUrlParser: true
+});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    // we're connected!
-    console.log("Connected correctly to server");
+  // we're connected!
+  console.log("Connected correctly to server");
 });
 
 var routes = require('./routes/index');
@@ -35,32 +37,34 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 
 // Secure traffic only
-app.all('*', function(req, res, next){
-    console.log('req start: ',req.secure, req.hostname, req.url, app.get('port'));
+app.all('*', function (req, res, next) {
+  console.log('req start: ', req.secure, req.hostname, req.url, app.get('port'));
   if (req.secure) {
     return next();
   };
 
- res.redirect('https://'+req.hostname+':'+app.get('secPort')+req.url);
+  res.redirect('https://' + req.hostname + ':' + app.get('secPort') + req.url);
 });
 
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/dishes',dishRouter);
-app.use('/promotions',promoRouter);
-app.use('/leadership',leaderRouter);
+app.use('/dishes', dishRouter);
+app.use('/promotions', promoRouter);
+app.use('/leadership', leaderRouter);
 app.use('/favorites', favoriteRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -70,7 +74,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json({
       message: err.message,
@@ -81,7 +85,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
