@@ -4,13 +4,14 @@
 <!-- ul -->
 * Front-end UI Frameworks
     * Boostrap
+    * Reactstrap
     * jQuery
     * Font Awesome
 * Front-end Building Tools
     * Gulp
     * Yeoman
     * Bower
-* Front-end Single App Frameworks
+* Front-end Single Page App Frameworks
     * AngularJS
     * React
 * Hybrid and Cross-device Platform Development Frameworks
